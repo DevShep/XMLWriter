@@ -1,0 +1,24 @@
+{
+	"name": "devshep/xmlwriter",
+	"version": "0.1.0-alpha",
+	"keywords": ["PHP", "XML", "array", "XMLWriter"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jacob Haines",
+			"email": "jacob.k.haines@gmail.com",
+			"role": "developer"
+		}
+	],
+	"support": {
+		"issues:": "https://github.com/DevShep/XMLWriter/issues"
+	},
+	 "require": {
+        "php": ">=5.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+
+	"description": "Small PHP utility to allow elegant, self-validating conversions from an array to XML."
+}
