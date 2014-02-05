@@ -29,9 +29,11 @@ class XMLWriter
 {
 
 	/**
-	 * Validates the input to be a valid XMLObject or array of Objects
-	 * Throws exception if any invalid data is found
-	 * @param  $xmlObj      
+	 * Validates the input to be a valid XMLObject or array of Objects.
+	 * @param  mixed $xmlObj      
+	 * @throws XMLWriterException If $xmlObject or array elements are not of iXMLObject
+	 * @static
+	 * @access private
 	 */
 	private static function validate($xmlObj) {
 		if(is_array($xmlObj)) {
@@ -41,16 +43,17 @@ class XMLWriter
 		} elseif(!($xmlObj instanceof iXMLObject)) {
 			throw XMLWriterException::invalidObjectInstance('iXMLObject');
 		} else {
-			// Is there a way to have custom exception handling here?
+			// Is there a way to have custom exception handling here? Should that even matter?
 			$xmlObj->validate();
 		}
 	}
 
 	/**
-	 * Returns XML string for the array of XMLObjects or XMLObject 
-	 * @param  $xmlObj array of XMLObjects OR single XMLObject
+	 * Returns XML string for the array of XMLObjects or XMLObject. 
+	 * @param  mixed  $xmlObj array of XMLObjects OR single XMLObject
 	 * @param  string $base   Base element name
 	 * @return string         XML string
+	 * @static
 	 */
 	static function write($xmlObj, $base = 'xml') {
 		self::validate($xmlObj);
@@ -62,9 +65,11 @@ class XMLWriter
 
 
 	/**
-	 * Takes the given XMLObject or array and converts it into an XML string
+	 * Takes the given XMLObject or array and converts it into an XML string.
 	 * @param  $xmlObj XMLObject, array of XMLObjects, or array of values
 	 * @param  SimpleXMLElement $xml    Current xml element
+	 * @static
+	 * @access private
 	 */
 	private static function objectToXML($xmlObj, &$xml) {
 		if(is_array($xmlObj)) {
