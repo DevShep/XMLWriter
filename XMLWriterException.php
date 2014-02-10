@@ -16,45 +16,24 @@
  * and is licensed under the MIT license.
  */
 
-namespace XMLWriter;
+namespace TBD;
 
 use Exception;
 
 /**
 * Base exception class for XMLWriter library
+ * @since 1.0
+ * @author Jacob Haines <jacob.k.haines@gmail.com>
+ * @todo  When finalizing the exception class name, correct documentation
 */
 class XMLWriterException extends Exception
 {
-	public static function unMappedKey($key) {
-		return new self("Key $key is not defined in the requirement map.");
-	}
-
-	public static function unsetKey($key, $map) {
-		return new self("Key $key is not defined in the $map map.");
-	}
-
-	public static function inequivalentLengths($map) {
-		return new self("The $map map's element count does not match the requirment map's element count.");
-	}
-
-	public static function undefinedRequiredElement($key) {
-		return new self("Required element $key is not defined.");
-	}
-
-	public static function incorrectDataType($key, $expected, $given) {
-		return new self("For element $key, expected $expected, $given given.");
-	}
-
-	public static function maxLengthViolation($key, $expected, $given) {
-		return new self("Element $key is too long. Expected a length of $expected; received a length of $given.");
-	}
-
-	public static function unsetReqMap($map) {
-		return new self("Unset requirement map. Cannot use $map validations.");
-	}
-
 	public static function invalidObjectInstance($type) {
 		return new self("Object must be an instance of $type.");
+	}
+
+	public static function unsetRequiredKey($key) {
+		return new self("Required key $key is null.");
 	}
 }
 

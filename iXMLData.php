@@ -16,10 +16,11 @@
  * and is licensed under the MIT license.
  */
 
-namespace XML;
+namespace TBD;
 
 interface iXMlData {
 	public function getData();
+	public function getMap();
 	public function getRoot();
 	public function getRuleset();
 }

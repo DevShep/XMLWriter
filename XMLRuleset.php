@@ -16,13 +16,14 @@
  * and is licensed under the MIT license.
  */
 
-namespace VXML;
+namespace TBD;
 
 /**
  * A container class used to hold XMLValidator objects
  *
  * @since 1.0
- * @author Jacob Haines<jacob.k.haines@gmail.com>
+ * @author Jacob Haines <jacob.k.haines@gmail.com>
+ * @todo  When finalizing the exception class name, correct documentation
  */
 final class XMLRuleset {
 
@@ -43,8 +44,7 @@ final class XMLRuleset {
 	 * @param mixed  must either be a single array of XMLValidators OR variable amount of XMLValidators
 	 * @throws VXMLException If an element of the array or argument passed is not an XMLValidator
 	 */
-	function __construct();
-	{
+	function __construct()	{
 		$this->setValidators(func_get_args());
 	}
 
@@ -88,14 +88,16 @@ final class XMLRuleset {
 
 	/**
 	 * Runs through the validator array and validates data; returns true if all pass; will catch VXMLExceptions from validators and return false if $this->throwExceptions is false
-	 * @param  array $dataMap DataMap from iXMLData; normally handled internally
-	 * @return bool          true if all validators pass; false otherwise
+	 * @param  array $data DataMap from iXMLData; normally handled internally
+	 * @return bool          true if all validators pass; false otherwise (may pass on exception instead)
 	 * @throws VXMLExeption If $this->throwExceptions is true AND a validator throws an VXMLException
 	 */
-	function validate($dataMap) {
+	function validate($data) {
 		foreach ($this->$validators as $validator) {
 			try {
-				$validator->validate($dataMap);
+				if (!$validator->validate($data) {
+					return false;
+				}
 			} catch (VXMLException $e) {
 				if ($this->throwExceptions) {
 					throw new VXMLException("XMLRuleset caught VXMLException during validation.", 0, $e);

@@ -16,7 +16,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace XML;
+namespace TBD;
 
 interface iXMlValidator {
 	public function validate($data);
