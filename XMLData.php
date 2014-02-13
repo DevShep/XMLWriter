@@ -19,45 +19,37 @@
 namespace TBD;
 
 /**
- * Object to store XML-related data including data, definition map (if applicable), root, and validation ruleset
- * 
+ * Object to store XML-related data including data, root, and validation ruleSet
+ *
+ * XMLData hosts the data to be converted into XML as well as rules to easily 
+ * decide what is included in the final XML document and to validate the data.
+ *
+ * The data array's keys are used to generate the XML elements and attributes. 
+ * Using the following setup <code>$data[$key] = $value</code>, we have the 
+ * following rules:
+ *
+ * 1) In general, the data is converted into the following: <$key>$value</$key>
+ * 2) To add an attribute, use "@ele-attr" as the key where
+ * 'ele' is equal to the attribute's element and 'attr' is equal to the 
+ * attribute's name
+ * 3) To have XML elements of the same name, have a nested array where its keys
+ * are integers
+ * 4) To create child elements, use a nested array with string keys to represent
+ * child element names.
+ *
+ * As an demonstration, say we're recording information about a library
+ * @todo  write example code
  */
 class XMLData implements iXMLData {
 
 	/**
 	 * Array of data to be converted into XML
+	 *
+	 *
+	 * Above will be converted to
 	 * @var array
 	 */
 	protected $data;
-
-	/**
-	 * Array of booleans; matching data keys will be converted into XML; keys that are marked true are required.
-	 *
-	 * <code>
-	 * 		$data = array(
-	 * 			'required' => 1,
-	 * 			'notRequired' => 2,
-	 * 			'unMapped' => 3
-	 * 		)
-	 *
-	 * 		$map = array(
-	 * 			'required' => true,
-	 * 			'requiredMissing' => true,
-	 * 			'notRequired' => false,
-	 * 			'notRequiredMissing' => false
-	 * 		)
-	 * </code>
-	 * 
-	 * Above arrays interact as follows:
-	 * 'required' => converted to XML
-	 * 'notRequired' => converted to XML
-	 * 'unMapped' => not included in XML
-	 * 'requiredMissing' => will throw exception since missing from $data
-	 * 'notRequiredMissing' => not included in XML, no exception thrown		 
-	 * 	
-	 * @var array
-	 */
-	protected $map;
 
 	/**
 	 * Root element of the to-be XML document
@@ -66,24 +58,22 @@ class XMLData implements iXMLData {
 	protected $root;
 
 	/**
-	 * Array of iXMLValidator objects used to run validations against the data
+	 * Array of iXMLValidator objects used to   run validations against the data
 	 * @var array
 	 */
-	protected $ruleset;
+	protected $ruleSet;
 
 	/**
-	 * $data and $root are required, $map and $ruleset are optional
+	 * $data and $root are required, $ruleSet is optional
 	 * @param array $data    data to be converted
 	 * @param string $root    root element name
-	 * @param array $map     map of required/unrequied elements
-	 * @param array $ruleset iXMLValidator objects
+	 * @param array $ruleSet iXMLValidator objects
 	 * @todo  add type checks
 	 */
-	function __construct($data, $root, $map = null, $ruleset = null) {
+	function __construct($root, $data, $ruleSet = null) {
 		$this->data = $data;
 		$this->root = $root;
-		$this->map = $map;
-		$this->ruleset = $ruleset;
+		$this->ruleSet = $ruleSet;
 	}
 
 	/**
@@ -100,22 +90,6 @@ class XMLData implements iXMLData {
 	 */
 	function setData($data) {
 		$this->data = $data;
-	}
-
-	/**
-	 * Returns the map array
-	 * @return array map array
-	 */
-	function getMap() {
-		return $this->map;
-	}
-
-	/**
-	 * Sets the map array
-	 * @param array $map map array
-	 */
-	function setMap($map) {
-		$htis->map = $map;
 	}
 
 	/**
@@ -138,42 +112,16 @@ class XMLData implements iXMLData {
 	 * Returns the XMLValidator array
 	 * @return array XMLValidator array
 	 */
-	function getRuleset() {
-		return $this->ruleset;
+	function getRuleSet() {
+		return $this->ruleSet;
 	}
 
 	/**
 	 * Sets the XMLValidator array
-	 * @param array $ruleset XMLValidator array
+	 * @param array $ruleSet XMLValidator array
 	 */
-	function setRuleset($ruleset) {
-		$this->ruleset = $ruleset;
-	}
-
-	/**
-	 * Returns the data array for XML conversion; may be limited by the map array
-	 * @return array data
-	 * @throws XMLException If A mapped key marked as required is unset/null in the data array
-	 */
-	function getXMLData() {
-		$map = $this->map;
-		$data = $this->data;
-
-		if (!is_null($map)) {
-			$arr = array();
-
-			foreach ($map as $key => $value) {
-				if ($value && is_null($data[$key])) {
-					throw XMLWriterException::unsetRequiredKey($key);
-				}
-
-				$arr[$key] = $data[$key];
-			}
-
-			return $arr;
-		} else {
-			return $data;
-		}
+	function setRuleSet($ruleSet) {
+		$this->ruleSet = $ruleSet;
 	}
 }
 

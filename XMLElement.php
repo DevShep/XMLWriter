@@ -18,29 +18,36 @@
 
 namespace TBD;
 
-use Exception;
-
 /**
-* Base exception class for XMLWriter library
- * @since 1.0
- * @author Jacob Haines <jacob.k.haines@gmail.com>
- * @todo  When finalizing the exception class name, correct documentation
+* XMLElement is an optional object to easily add attributes to an element.
+* @since  1.0
+* @author Jacob Haines <jacob.k.haines@gmail.com>
 */
-class XMLWriterException extends Exception
+class XMLElement
 {
-	public static function invalidObjectInstance($type) {
-		return new self("Object must be an instance of $type.");
+	protected $data;
+	protected $attributes;
+
+	function __construct($data, $attributes)
+	{
+		$this->data = $data;
+		$this->attributes = $attributes;
 	}
 
-	public static function unsetRequiredKey($key) {
-		return new self("Required key $key is null.");
+	function getData() {
+		return $this->data;
 	}
 
-	public static function invalidXMLData() {
-		return new self("The provided XMLData object failed validation.");
+	function setData($data) {
+		$this->data = $data;
 	}
-}
 
-?>
+	function getAttributes() {
+		return $this->attributes;
+	}
+
+	function setAttributes($attributes) {
+		$this->attributes = $attributes;
+	}
 
 ?>

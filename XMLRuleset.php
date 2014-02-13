@@ -25,7 +25,7 @@ namespace TBD;
  * @author Jacob Haines <jacob.k.haines@gmail.com>
  * @todo  When finalizing the exception class name, correct documentation
  */
-final class XMLRuleset {
+final class XMLRuleSet {
 
 	/**
 	 * Array of XMLValidator objects
@@ -60,10 +60,9 @@ final class XMLRuleset {
 	 * Accepts either an array of XMLValidator objects OR variable amount of XMLValidators; replaces existing validator array
 	 * @param mixed  must either be a single array of XMLValidators OR variable amount of XMLValidators
 	 */
-	function setValidators() {
+	function setValidators($args) {
 		$this->validators = array();
 
-		$args = func_get_args();
 		if (is_array($args[0])) {
 			$args = $args[0];
 		}
@@ -74,7 +73,7 @@ final class XMLRuleset {
 	}
 
 	/**
-	 * Adds an XMLValidator to the ruleset
+	 * Adds an XMLValidator to the ruleSet
 	 * @param iXMLValidator $validator object that implements iXMLValidator interface
 	 * @throws VXMLException If $validator is not of type iXMLValidator
 	 */
