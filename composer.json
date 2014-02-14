@@ -1,7 +1,7 @@
 {
 	"name": "devshep/xmlwriter",
 	"version": "0.1.0-alpha",
-	"keywords": ["PHP", "XML", "array", "XMLWriter"],
+	"keywords": ["PHP", "XML", "array", "EXML", "EasyXML"],
 	"license": "MIT",
 	"authors": [
 		{
@@ -18,6 +18,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*"
+    },
+    "autoload" : {
+    	"psr-4": {"EXML\\": "lib/EXML/"}
     },
 
 	"description": "Small PHP utility to allow elegant, self-validating conversions from an array to XML."

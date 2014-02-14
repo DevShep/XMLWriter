@@ -16,10 +16,11 @@
  * and is licensed under the MIT license.
  */
 
-namespace TBD;
+namespace EXML;
 
-interface iXMlValidator {
-	public function validate($data);
+interface iEXMLElement {
+	public function getData();
+	public function getAttributes();
 }
 
 

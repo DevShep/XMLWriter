@@ -16,7 +16,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace TBD;
+namespace EXML;
 
 use SimpleXMLElement;
 
@@ -26,7 +26,7 @@ use SimpleXMLElement;
 * @author Jacob Haines <jacob.k.haines@gmail.com>
 * @todo  revisit initial write function after unit tests. Likely uses root twice
 */
-class XMLDataWriter
+class EXMLWriter
 {
 
 	/**
@@ -52,7 +52,7 @@ class XMLDataWriter
 
 		$root = $obj->getRoot();
 		$xml = new SimpleXMLElement("<$root></$root>");
-		self::objectToXML($obj, $xml);
+		self::objectToXML($obj->getData(), $xml);
 		return $xml->asXML();
 	}
 

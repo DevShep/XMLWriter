@@ -16,14 +16,14 @@
  * and is licensed under the MIT license.
  */
 
-namespace TBD;
+namespace EXML;
 
 /**
 * XMLElement is an optional object to easily add attributes to an element.
 * @since  1.0
 * @author Jacob Haines <jacob.k.haines@gmail.com>
 */
-class XMLElement
+class EXMLElement
 {
 	protected $data;
 	protected $attributes;
@@ -49,5 +49,5 @@ class XMLElement
 	function setAttributes($attributes) {
 		$this->attributes = $attributes;
 	}
-
+}
 ?>

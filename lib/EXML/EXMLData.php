@@ -16,7 +16,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace TBD;
+namespace EXML;
 
 /**
  * Object to store XML-related data including data, root, and validation ruleSet
@@ -40,7 +40,7 @@ namespace TBD;
  * As an demonstration, say we're recording information about a library
  * @todo  write example code
  */
-class XMLData implements iXMLData {
+class EXMLData implements iEXMLData {
 
 	/**
 	 * Array of data to be converted into XML

@@ -16,31 +16,19 @@
  * and is licensed under the MIT license.
  */
 
-namespace TBD;
+namespace EXML\Test;
 
-use Exception;
 
 /**
-* Base exception class for XMLWriter library
- * @since 1.0
- * @author Jacob Haines <jacob.k.haines@gmail.com>
- * @todo  When finalizing the exception class name, correct documentation
+* 
 */
-class XMLWriterException extends Exception
+class EXMLElement_Mock implements iEXMLElement
 {
-	public static function invalidObjectInstance($type) {
-		return new self("Object must be an instance of $type.");
+	public function getData() {
+		return 40;
 	}
-
-	public static function unsetRequiredKey($key) {
-		return new self("Required key $key is null.");
-	}
-
-	public static function invalidXMLData() {
-		return new self("The provided XMLData object failed validation.");
+	public function getAttributes() {
+		return array('schedule' => 'weekly');
 	}
 }
-
-?>
-
 ?>

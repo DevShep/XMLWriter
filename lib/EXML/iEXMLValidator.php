@@ -16,13 +16,10 @@
  * and is licensed under the MIT license.
  */
 
-namespace TBD;
+namespace EXML;
 
-interface iXMlData {
-	public function getData();
-	public function getMap();
-	public function getRoot();
-	public function getRuleset();
+interface iEXMlValidator {
+	public function validate($data);
 }
 
 
