@@ -20,6 +20,7 @@ use PHPUnit_Framework_TestCase,
 	EXML\EXMLElement;
 
 require '/vendor/autoload.php';
+
 /**
  * @backupGlobals disabled
  */
