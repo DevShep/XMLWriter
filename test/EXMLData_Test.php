@@ -17,27 +17,40 @@
  */
 
 use PHPUnit_Framework_TestCase,
-	EXML\EXMLElement;
+	EXML\EXMLData,
+	EXML\Test\EXMLData_Mock;
 
 require '/vendor/autoload.php';
 
 /**
  * @backupGlobals disabled
  */
-class EXMLElement_Test extends PHPUnit_Framework_TestCase {
+class EXMLData_Test extends PHPUnit_Framework_TestCase {
 	protected static $data;
-	protected static $attributes;
+	protected static $root;
+	protected static $ruleSet;
 	protected $obj;
 
 	static function setUpBeforeClass() {
-		self::$data = 40;
-		self::$attributes = array(
-			'schedule' => 'weekly', 
-		);
+		// Grab Mock Object's values
+		$mock = new EXMLData_Mock();
+		self::$data = $mock->getData();
+		self::$root = $mock->getRoot();
+		self::$ruleSet = $mock->getRuleSet();
 	}
 
 	function setUp() {
-		$this->obj = new EXMLElement(self::$data, self::$attributes);
+		$this->obj = new EXMLData(self::$root, self::$data, self::$ruleSet);
+	}
+
+	function testGetRoot() {
+		$this->assertEquals($this->obj->getRoot(), self::$root);
+	}
+
+	function testSetRoot() {
+		$root = 'book';
+		$this->obj->setRoot($root);
+		$this->assertEquals($this->obj->getRoot(), $root);
 	}
 
 	function testGetData() {
@@ -45,22 +58,13 @@ class EXMLElement_Test extends PHPUnit_Framework_TestCase {
 	}
 
 	function testSetData() {
-		$rate = 55;
-		$this->obj->setData($rate);
-		$this->assertEquals($this->obj->getData(), $rate);
-	}
-
-	function testGetAttributes() {
-		$this->assertEquals($this->obj->getAttributes(), self::$attributes);
-	}
-
-	function testSetAttributes() {
-		$attributes = array(
-			'schedule' => 'bi-weekly',
-			'pay-rate' => 'monthly'
+		$data = array(
+			'title' => 'Game of Thrones',
+			'author' => 'George R. R. Martin',
+			'series' => 'Song of Ice and Fire',
 		);
-		$this->obj->setAttributes($attributes);
-		$this->assertEquals($this->obj->getAttributes(), $attributes);
+		$this->obj->setData($data);
+		$this->assertEquals($this->obj->getData(), $data);
 	}
 }
 

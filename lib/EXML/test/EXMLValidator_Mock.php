@@ -18,11 +18,13 @@
 
 namespace EXML\Test;
 
+use EXML\iEXMLValidator;
+
 
 /**
 * 
 */
-class EXMLValidator_Mock implements iEXMLData
+class EXMLValidator_Mock implements iEXMLValidator
 {
 	function validate($data) {
 		return true;

@@ -25,7 +25,7 @@ namespace EXML;
  * @author Jacob Haines <jacob.k.haines@gmail.com>
  * @todo  When finalizing the exception class name, correct documentation
  */
-final class EXMLRuleSet {
+final class EXMLRuleSet implements iEXMLValidator {
 
 	/**
 	 * Array of EXMLValidator objects
@@ -91,7 +91,7 @@ final class EXMLRuleSet {
 	 * @return bool          true if all validators pass; false otherwise (may pass on exception instead)
 	 * @throws EXMLException If $this->throwExceptions is true AND a validator throws an VXMLException
 	 */
-	function runValidations($data) {
+	function validate($data) {
 		foreach ($this->$validators as $validator) {
 			try {
 				if (!$validator->validate($data) {

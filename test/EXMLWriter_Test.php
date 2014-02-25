@@ -16,19 +16,34 @@
  * and is licensed under the MIT license.
  */
 
-namespace EXML\Test;
+use PHPUnit_Framework_TestCase,
+	EXML\EXMLWriter,
+	EXML\Test\EXMLData_Mock;
 
+require '/vendor/autoload.php';
 
 /**
-* 
-*/
-class EXMLElement_Mock implements iEXMLElement
-{
-	public function getData() {
-		return 40;
+ * @backupGlobals disabled
+ */
+class EXMLWriter_Test extends PHPUnit_Framework_TestCase {
+	protected static $xml;
+	protected static $obj;
+
+	static function setUpBeforeClass() {
+		self::$xml = <<< xml
+<employee><first-name>John</first-name><last-name>Smith</last-name><middle-initial>E</middle-initial><phone>304-555-1234</phone><title>Director</title><address><street-1>15th W St.</street-1><street-2>Apt 105</street-2><city>Farmvegas</city><state>VA</state><zip>23943</zip></address><birthdate>1980-03-12</birthdate><hours>40</hours><rate>30.25</rate></employee>
+xml;
+		self::$obj = new EXMLData_Mock();
 	}
-	public function getAttributes() {
-		return array('schedule' => 'weekly');
+
+	function testValidate() {
+		$this->assertTrue(EXMLWriter::validate(self::$obj));
+	}
+
+	function testWrite() {
+		$this->assertXmlStringEqualsXmlString(EXMLWriter::write(self::$obj), self::$xml);
 	}
 }
+
+
 ?>

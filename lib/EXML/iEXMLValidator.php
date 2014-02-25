@@ -18,7 +18,7 @@
 
 namespace EXML;
 
-interface iEXMlValidator {
+interface iEXMLValidator {
 	public function validate($data);
 }
 

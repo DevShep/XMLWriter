@@ -47,7 +47,7 @@ class EXMLWriter
 	 */
 	static function write($obj) {
 		if (!self::validate($obj)) {
-			throw new XMLWriterException::invalidXMLData();
+			throw XMLWriterException::invalidXMLData();
 		}
 
 		$root = $obj->getRoot();
@@ -75,13 +75,13 @@ class EXMLWriter
 				} 
 
 				// XMLData object. Get root, dig in
-				elseif ($value instanceof iXMLData) {
+				elseif ($value instanceof iEXMLData) {
 					$subNode = $value->getRoot();
 					self::objectToXML($value->getDataMap(), $subNode);
 				} 
 
 				// XMLElement object. Expect attributes
-				elseif ($value instanceof XMLElement) {
+				elseif ($value instanceof EXMLElement) {
 					$element = $value->getData();
 
 					//	If it's an array, dig in
@@ -91,7 +91,7 @@ class EXMLWriter
 					} 
 
 					// If it's XMLData, get root and dig in
-					elseif ($element instanceof iXMLData) {
+					elseif ($element instanceof iEXMLData) {
 						$subNode = $value->getRoot();
 						self::objectToXML($value->getDataMap(), $subNode);
 					}

@@ -18,48 +18,36 @@
 
 namespace EXML\Test;
 
-use EXML\EXMLRuleSet;
+use EXML\EXMLData;
 
 
 /**
 * 
 */
-class EXMLData_Mock implements iEXMLData
+class EXMLData_Mock extends EXMLData
 {
-	private $data =  array(
-		'first-name' => 'John',
-		'last-name' => 'Smith',
-		'middle-initial' => 'E',
-		'phone' => '304-555-1234',
-		'title' => 'Director',
-		'address' => array(
-			'street-1' => '15th W St.',
-			'street-2' => 'Apt 105',
-			'city' => 'Farmvegas',
-			'state' => 'Virginia',
-			'zip' =. '23943'
-			),
-		'birthdate' => '1980-03-12',
-		'hours' => new EXMLElementMock(),
-		'rate' => 30.25
-	);
+	function __construct() {
+		$data =  array(
+			'first-name' => 'John',
+			'last-name' => 'Smith',
+			'middle-initial' => 'E',
+			'phone' => '304-555-1234',
+			'title' => 'Director',
+			'address' => array(
+				'street-1' => '15th W St.',
+				'street-2' => 'Apt 105',
+				'city' => 'Farmvegas',
+				'state' => 'VA',
+				'zip' => '23943'
+				),
+			'birthdate' => '1980-03-12',
+			'hours' => 40,
+			'rate' => 30.25
+		);
 
-	private $root = 'employee';
+		$ruleSet = new EXMLValidator_Mock();
 
-	private $ruleSet = array(
-		1 => new EXMLValidator_Mock(),
-		2 => new EXMLValidator_Mock(),
-		3 => new EXMLValidator_Mock(),
-	);
-
-	function getData() {
-		return $this->data;
-	}
-	function getRoot() {
-		return $this->root;
-	}
-	function getRuleset() {
-		return $this->ruleSet;
+		parent::__construct('employee', $data, $ruleSet);
 	}
 }
 ?>
