@@ -21,7 +21,7 @@ namespace EXML;
 interface iEXMLData {
 	public function getData();
 	public function getRoot();
-	public function getRuleset();
+	public function getRuleSet();
 }
 
 

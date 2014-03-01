@@ -25,7 +25,7 @@ namespace EXML;
  * @author Jacob Haines <jacob.k.haines@gmail.com>
  * @todo  When finalizing the exception class name, correct documentation
  */
-final class EXMLRuleSet implements iEXMLValidator {
+class EXMLRuleSet implements iEXMLValidator {
 
 	/**
 	 * Array of EXMLValidator objects
@@ -94,7 +94,7 @@ final class EXMLRuleSet implements iEXMLValidator {
 	function validate($data) {
 		foreach ($this->$validators as $validator) {
 			try {
-				if (!$validator->validate($data) {
+				if (!$validator->validate($data)) {
 					return false;
 				}
 			} catch (EXMLException $e) {

@@ -58,8 +58,8 @@ class EXMLData implements iEXMLData {
 	protected $root;
 
 	/**
-	 * Array of iXMLValidator objects used to   run validations against the data
-	 * @var array
+	 * Validator for the data 
+	 * @var EXMLValidator
 	 */
 	protected $ruleSet;
 
@@ -109,16 +109,16 @@ class EXMLData implements iEXMLData {
 	}
 
 	/**
-	 * Returns the XMLValidator array
-	 * @return array XMLValidator array
+	 * Returns the EXMLValidator
+	 * @return EXMLValidator
 	 */
 	function getRuleSet() {
 		return $this->ruleSet;
 	}
 
 	/**
-	 * Sets the XMLValidator array
-	 * @param array $ruleSet XMLValidator array
+	 * Sets the EXMLValidator
+	 * @param EXMLValidator $ruleSet EXMLValidator
 	 */
 	function setRuleSet($ruleSet) {
 		$this->ruleSet = $ruleSet;

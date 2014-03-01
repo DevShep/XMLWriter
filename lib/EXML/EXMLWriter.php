@@ -33,8 +33,12 @@ class EXMLWriter
 	 * Validates the input to be a valid XMLData or array of Objects.
 	 * @param  iXMLData $obj iXMNData Object
 	 * @return bool      true if all tests passed, false if not
+	 * @throws EXMLException If $obj is not interfaced with iEXMLData
 	 */
 	static function validate($obj) {
+		if (!($obj instanceof iEXMLData)) {
+			throw EXMLException::invalidObjectInstance('iEXMLData');
+		}
 		$ruleSet = $obj->getRuleSet();
 		return !is_null($ruleSet) ? $ruleSet->validate($obj->getData()) : true;
 	}
@@ -43,13 +47,13 @@ class EXMLWriter
 	 * Returns XML string for the array of XMLDatas or XMLData. 
 	 * @param  iXMLData  $obj array of XMLDatas OR single XMLData
 	 * @return string         XML string
+	 * @throws EXMLException If the EXMLData's validate fails.
 	 * @static
 	 */
 	static function write($obj) {
 		if (!self::validate($obj)) {
-			throw XMLWriterException::invalidXMLData();
+			throw EXMLException::invalidXMLData();
 		}
-
 		$root = $obj->getRoot();
 		$xml = new SimpleXMLElement("<$root></$root>");
 		self::objectToXML($obj->getData(), $xml);

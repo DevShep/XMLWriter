@@ -37,10 +37,8 @@ class EXMLException extends Exception
 	}
 
 	public static function invalidXMLData() {
-		return new self("The provided XMLData object failed validation.");
+		return new self("The provided EXMLData object failed validation.");
 	}
 }
-
-?>
 
 ?>

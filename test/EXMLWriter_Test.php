@@ -43,6 +43,37 @@ xml;
 	function testWrite() {
 		$this->assertXmlStringEqualsXmlString(EXMLWriter::write(self::$obj), self::$xml);
 	}
+
+
+	/****	EXCEPTIONS 	****/
+
+	/**
+	 * @expectedException EXML\EXMLException
+	 * @expectedExceptionMessage Object must be an instance of iEXMLData.
+	 */
+	public function testException_InvalidObjectInstance() {
+		EXMLWriter::write(1);	
+	}
+
+	/**
+	 * @expectedException EXML\EXMLException
+	 * @expectedExceptionMessage The provided EXMLData object failed validation.
+	 */
+	public function testException_InvalidXMLData() {
+		$mockVal = $this->getMock('EXML\EXMLRuleSet');
+		$mockVal->expects($this->any())
+			->method('validate')
+			->will($this->returnValue(false));
+
+		$obj = $this->getMock('EXML\EXMLData');
+		$obj->expects($this->any())
+			->method('getRuleSet')
+			->will($this->returnValue($mockVal));
+
+		EXMLWriter::write($obj);	
+	}
+
+
 }
 
 
