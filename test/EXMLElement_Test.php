@@ -16,8 +16,7 @@
  * and is licensed under the MIT license.
  */
 
-use PHPUnit_Framework_TestCase,
-	EXML\EXMLElement;
+use EXML\EXMLElement;
 
 require '/vendor/autoload.php';
 
