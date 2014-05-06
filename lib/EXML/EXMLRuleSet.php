@@ -73,6 +73,22 @@ class EXMLRuleSet implements iEXMLValidator {
 	}
 
 	/**
+	 * Gets whether the validator should throw an exception
+	 * @return bool bool throwExceptions true/false
+	 */
+	function getThrowExceptions() {
+		return $this->throwExceptions;
+	}
+
+	/**
+	 * Sets whether the validator should throw an exception
+	 * @param bool bool throwExceptions true/false
+	 */
+	function setThrowExceptions($arg) {
+		$this->throwExceptions = $arg;
+	}
+
+	/**
 	 * Adds an EXMLValidator to the ruleSet
 	 * @param iEXMLValidator $validator object that implements iXMLValidator interface
 	 * @throws EXMLException If $validator is not of type iXMLValidator

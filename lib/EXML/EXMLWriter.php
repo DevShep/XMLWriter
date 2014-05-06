@@ -106,7 +106,7 @@ class EXMLWriter
 					}
 
 					// Iterate over the attribute array
-					foreach ($$element->getAttributes() as $attrKey => $attrValue) {
+					foreach ($element->getAttributes() as $attrKey => $attrValue) {
 						$subNode->addAttribute($attrKey, $attrValue);
 					}
 				} 

@@ -23,21 +23,6 @@ namespace EXML;
  *
  * XMLData hosts the data to be converted into XML as well as rules to easily 
  * decide what is included in the final XML document and to validate the data.
- *
- * The data array's keys are used to generate the XML elements and attributes. 
- * Using the following setup <code>$data[$key] = $value</code>, we have the 
- * following rules:
- *
- * 1) In general, the data is converted into the following: <$key>$value</$key>
- * 2) To add an attribute, use "@ele-attr" as the key where
- * 'ele' is equal to the attribute's element and 'attr' is equal to the 
- * attribute's name
- * 3) To have XML elements of the same name, have a nested array where its keys
- * are integers
- * 4) To create child elements, use a nested array with string keys to represent
- * child element names.
- *
- * As an demonstration, say we're recording information about a library
  * @todo  write example code
  */
 class EXMLData implements iEXMLData {
