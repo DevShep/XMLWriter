@@ -57,21 +57,23 @@ xml;
 	/**
 	 * @expectedException EXML\EXMLException
 	 * @expectedExceptionMessage The provided EXMLData object failed validation.
-	 * @todo  Finish this Test.
 	 */
-	/*public function testException_InvalidXMLData() {
+	public function testException_InvalidXMLData() {
 		$mockVal = $this->getMock('EXML\EXMLRuleSet');
 		$mockVal->expects($this->any())
 			->method('validate')
 			->will($this->returnValue(false));
 
-		$obj = $this->getMock('EXML\EXMLData');
+		$obj = $this->getMockBuilder('EXML\EXMLData')
+			->disableOriginalConstructor()
+			->getMock();
+
 		$obj->expects($this->any())
 			->method('getRuleSet')
 			->will($this->returnValue($mockVal));
 
 		EXMLWriter::write($obj);	
-	}	*/
+	}	
 
 
 }
