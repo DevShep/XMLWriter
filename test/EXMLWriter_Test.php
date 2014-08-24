@@ -27,10 +27,14 @@ require '/vendor/autoload.php';
 class EXMLWriter_Test extends PHPUnit_Framework_TestCase {
 	protected static $xml;
 	protected static $obj;
+	protected static $xmlFiltered;
 
 	static function setUpBeforeClass() {
 		self::$xml = <<< xml
 <employee><first-name>John</first-name><last-name>Smith</last-name><middle-initial>E</middle-initial><phone>304-555-1234</phone><title>Director</title><address><street-1>15th W St.</street-1><street-2>Apt 105</street-2><city>Farmvegas</city><state>VA</state><zip>23943</zip></address><birthdate>1980-03-12</birthdate><hours>40</hours><rate>30.25</rate></employee>
+xml;
+		self::$xmlFiltered = <<< xml
+<employee><first-name>John</first-name><last-name>Smith</last-name></employee>
 xml;
 		self::$obj = new EXMLData_Mock();
 	}
@@ -41,6 +45,11 @@ xml;
 
 	function testWrite() {
 		$this->assertXmlStringEqualsXmlString(EXMLWriter::write(self::$obj), self::$xml);
+	}
+
+	function testFilter() {
+		$filter = ['first-name'=> true, 'last-name'=>true];
+		$this->assertXmlStringEqualsXmlString(EXMLWriter::write(self::$obj, $filter), self::$xmlFiltered);
 	}
 
 
@@ -74,8 +83,6 @@ xml;
 
 		EXMLWriter::write($obj);	
 	}	
-
-
 }
 
 
